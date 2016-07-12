@@ -1,0 +1,6 @@
+E:\GitSpace\WeChat\WeChat\WeChatHelper\bin\Debug\WeChatHelper.dll
+E:\GitSpace\WeChat\WeChat\WeChatHelper\bin\Debug\WeChatHelper.pdb
+E:\GitSpace\WeChat\WeChat\WeChatHelper\bin\Debug\Newtonsoft.Json.dll
+E:\GitSpace\WeChat\WeChat\WeChatHelper\bin\Debug\Newtonsoft.Json.xml
+E:\GitSpace\WeChat\WeChat\WeChatHelper\obj\Debug\WeChatHelper.dll
+E:\GitSpace\WeChat\WeChat\WeChatHelper\obj\Debug\WeChatHelper.pdb

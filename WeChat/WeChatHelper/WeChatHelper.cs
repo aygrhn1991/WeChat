@@ -11,7 +11,9 @@ namespace WeChatHelper
     public class WeChatHelper
     {
         Helper helper = new Helper();
-        public void CheckConfiguration()
+
+        #region 服务器配置
+        public string CheckConfiguration()
         {
             string signature = HttpContext.Current.Request["signature"];
             string timestamp = HttpContext.Current.Request["timestamp"];
@@ -29,7 +31,12 @@ namespace WeChatHelper
             sha1.Clear();
             string resultSring = BitConverter.ToString(tempBytes).Replace("-", "").ToLower();
             if (resultSring == signature)
-                HttpContext.Current.Response.Write(echostr);
-        }
+                //HttpContext.Current.Response.Write(echostr);
+                return echostr;
+            return "error";
+        } 
+        #endregion
+
+
     }
 }

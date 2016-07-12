@@ -105,6 +105,7 @@
     <Content Include="packages.config" />
     <Content Include="access_token.json" />
     <Content Include="jsapi_ticket.json" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,7 +117,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WeChatHelper\WeChatHelper.csproj">

@@ -11,9 +11,21 @@ namespace WeChat.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            WeChatHelper.WeChatHelper helper = new WeChatHelper.WeChatHelper();
-            
             return View();
+        }
+        public ActionResult CheckConfiguration()
+        {
+            WeChatHelper.WeChatHelper helper = new WeChatHelper.WeChatHelper();
+            string str = helper.CheckConfiguration();
+            if (str == "error")
+            {
+                return null;
+            }
+            else
+            {
+                HttpContext.Response.Write(str);
+                return null;
+            }
         }
     }
 }
