@@ -48,14 +48,6 @@ namespace WeChatHelper
         public string[] privilege { get; set; }
         public string unionid { get; set; }
     }
-    public class JSApiTicket
-    {
-        public int errcode { get; set; }
-        public string errmsg { get; set; }
-        public string ticket { get; set; }
-        public int expires_in { get; set; }
-        public DateTime get_time { get; set; }
-    }
     public class UserInfo
     {
         public int subscribe { get; set; }
@@ -72,6 +64,103 @@ namespace WeChatHelper
         public string remark { get; set; }
         public string groupid { get; set; }
     }
+    public class JSSDKConfig
+    {
+        public string appId { get; set; }
+        public string timestamp { get; set; }
+        public string nonceStr { get; set; }
+        public string signature { get; set; }
+    }
+    public class JSApiTicket
+    {
+        public int errcode { get; set; }
+        public string errmsg { get; set; }
+        public string ticket { get; set; }
+        public int expires_in { get; set; }
+        public DateTime get_time { get; set; }
+    }
+    public class PayConfig
+    {
+        public string appId { get; set; }
+        public string timeStamp { get; set; }
+        public string nonceStr { get; set; }
+        public string package { get; set; }
+        public string signType { get; set; }
+        public string paySign { get; set; }
+    }
+    public class UnifiedOrderRequest
+    {
+        public string appid { get; set; }
+        public string mch_id { get; set; }
+        private string device_info { get; set; }
+        public string nonce_str { get; set; }
+        public string sign { get; set; }
+        public string body { get; set; }
+        private string detail { get; set; }
+        private string attach { get; set; }
+        public string out_trade_no { get; set; }
+        private string fee_type { get; set; }
+        public int total_fee { get; set; }
+        public string spbill_create_ip { get; set; }
+        private string time_start { get; set; }
+        private string time_expire { get; set; }
+        private string goods_tag { get; set; }
+        public string notify_url { get; set; }
+        public string trade_type { get; set; }
+        private string product_id { get; set; }
+        private string limit_pay { get; set; }
+        public string openid { get; set; }
+    }
+    public class UnifiedOrderResponse
+    {
+        public string return_code { get; set; }
+        public string return_msg { get; set; }
+        public string appid { get; set; }
+        public string mch_id { get; set; }
+        public string device_info { get; set; }
+        public string nonce_str { get; set; }
+        public string sign { get; set; }
+        public string result_code { get; set; }
+        public string err_code { get; set; }
+        public string err_code_des { get; set; }
+        public string trade_type { get; set; }
+        public string prepay_id { get; set; }
+        public string code_url { get; set; }
+    }
+    public class PayCallBack
+    {
+        public string return_code { get; set; }
+        public string return_msg { get; set; }
+        public string appid { get; set; }
+        public string mch_id { get; set; }
+        public string device_info { get; set; }
+        public string nonce_str { get; set; }
+        public string sign { get; set; }
+        public string result_code { get; set; }
+        public string err_code { get; set; }
+        public string err_code_des { get; set; }
+        public string openid { get; set; }
+        public string is_subscribe { get; set; }
+        public string trade_type { get; set; }
+        public string bank_type { get; set; }
+        public string total_fee { get; set; }
+        public string fee_type { get; set; }
+        public string cash_fee { get; set; }
+        public string cash_fee_type { get; set; }
+        public string coupon_fee { get; set; }
+        public string coupon_count { get; set; }
+        public string coupon_id_0 { get; set; }
+        public string coupon_fee_0 { get; set; }
+        public string transaction_id { get; set; }
+        public string out_trade_no { get; set; }
+        public string attach { get; set; }
+        public string time_end { get; set; }
+    }
+    public class PayCallBackResponse
+    {
+        public string return_code { get; set; }
+        public string return_msg { get; set; }
+    }
     public enum RequestMethod
     {
         GET,
@@ -81,5 +170,15 @@ namespace WeChatHelper
     {
         snsapi_base,
         snsapi_userinfo,
+    }
+    public enum SignType
+    {
+        SHA1,
+        MD5,
+    }
+    public enum PayResult
+    {
+        SUCCESS,
+        FAIL,
     }
 }

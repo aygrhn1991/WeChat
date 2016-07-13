@@ -110,6 +110,143 @@ namespace WeChatHelper
         }
         #endregion
 
+        #region accesstoken直接拉取用户信息
+        public UserInfo GetUserInfo(string openid)
+        {
+            string url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + GetAccessToken() + "&openid=" + openid + "&lang=zh_CN";
+            string response = helper.HttpHelper(url, RequestMethod.GET);
+            return helper.GetObject(new UserInfo(), response);
+        }
+        #endregion
+
+        #region JS-SDK
+        public JSSDKConfig GetJSSDKConfig(string url)
+        {
+            WeChatParameters wechatparameters = helper.GetWeChatParameters();
+            JSSDKConfig jssdkconfig = new JSSDKConfig();
+            jssdkconfig.appId = wechatparameters.AppID;
+            jssdkconfig.nonceStr = helper.GetNonceStr();
+            jssdkconfig.timestamp = helper.GetTimeStamp(DateTime.Now).ToString();
+            jssdkconfig.signature = GetJSSDKSignature(jssdkconfig.nonceStr, jssdkconfig.timestamp, url);
+            return jssdkconfig;
+        }
+        private string GetJSSDKSignature(string nonceStr, string timeStamp, string url)
+        {
+            string ticket = GetJSApiTicket();
+            string[] array = { "noncestr=" + nonceStr, "jsapi_ticket=" + ticket, "timestamp=" + timeStamp, "url=" + url };
+            Array.Sort(array);
+            string str = string.Join("&", array);
+            SHA1 sha1 = SHA1.Create();
+            byte[] bytes = Encoding.UTF8.GetBytes(str);
+            bytes = sha1.ComputeHash(bytes);
+            sha1.Clear();
+            string signature = BitConverter.ToString(bytes).Replace("-", "").ToLower();
+            return signature;
+        }
+        private string GetJSApiTicket()
+        {
+            string path = HttpContext.Current.Server.MapPath("~/jsapi_ticket.json");
+            if (File.Exists(path))
+            {
+                string tempString = helper.ReadFromFile(path);
+                if (string.IsNullOrWhiteSpace(tempString))
+                {
+                    RequestJSApiTicket();
+                }
+                else
+                {
+                    JSApiTicket ticket = helper.GetObject(new JSApiTicket());
+                    if ((DateTime.Now - ticket.get_time).TotalSeconds > ticket.expires_in)
+                    {
+                        RequestJSApiTicket();
+                    }
+                }
+            }
+            else
+            {
+                RequestJSApiTicket();
+            }
+            return helper.GetObject(new JSApiTicket()).ticket;
+        }
+        private void RequestJSApiTicket()
+        {
+            string accesstoken = GetAccessToken();
+            string url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accesstoken + "&type=jsapi";
+            string response = helper.HttpHelper(url, RequestMethod.GET);
+            response = response.Replace("}", ",\"get_time\":\"" + DateTime.Now.ToString() + "\"}");
+            string path = HttpContext.Current.Server.MapPath("~/jsapi_ticket.json");
+            helper.WriteToFile(response, path);
+        }
+        #endregion
+
+        #region 支付
+        public string GetPrePaySign(UnifiedOrderRequest unifiedorder)
+        {
+            WeChatParameters wechatparameters = helper.GetWeChatParameters();
+            List<string> items = new List<string>();
+            var properties = unifiedorder.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.Name != "sign")
+                {
+                    var value = property.GetValue(unifiedorder);
+                    if (value != null && !string.IsNullOrEmpty(value.ToString()))
+                        items.Add(string.Format("{0}={1}", property.Name, value));
+                }
+            }
+            items.Sort();
+            string str1 = string.Join("&", items.ToArray());
+            string str2 = str1 + "&key=" + wechatparameters.mch_key;
+            string sign = helper.GetMD5(str2).ToUpper();
+            return sign;
+        }
+        public PayConfig GetPayConfig(UnifiedOrderRequest unifiedorder)
+        {
+            WeChatParameters wechatparameters = helper.GetWeChatParameters();
+            PayConfig payconfig = new PayConfig();
+            payconfig.appId = wechatparameters.AppID;
+            payconfig.nonceStr = helper.GetNonceStr();
+            payconfig.package = GetPrePayId(unifiedorder);
+            payconfig.signType = SignType.MD5.ToString();
+            payconfig.timeStamp = helper.GetTimeStamp(DateTime.Now).ToString();
+            payconfig.paySign = GetPaySign(payconfig);
+            return payconfig;
+        }
+        public PayResult GetPayResult()
+        {
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Request.InputStream))
+            {
+                string callbackstr = reader.ReadToEnd();
+                PayCallBack callback= helper.GetObjectByXmlString(new PayCallBack(), callbackstr);
+                if(callback.result_code== "SUCCESS")
+                {
+                    return PayResult.SUCCESS;
+                }
+                else
+                {
+                    return PayResult.FAIL;
+                }
+            }
+        }
+        private string GetPrePayId(UnifiedOrderRequest unifiedorder)
+        {
+            string url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+            string str = helper.ObjectToXmlSrting(unifiedorder);
+            string response = helper.HttpHelper(url, RequestMethod.POST, str);
+            return helper.GetObjectByXmlString(new UnifiedOrderResponse(), response).prepay_id;
+        }        
+        private string GetPaySign(PayConfig config)
+        {
+            WeChatParameters wechatparameters = helper.GetWeChatParameters();
+            string[] array = { "appId=" + wechatparameters.AppID, "timeStamp=" + config.timeStamp, "nonceStr=" + config.nonceStr, "package=" + config.package, "signType=" + config.signType };
+            Array.Sort(array);
+            string str = string.Join("&", array) + "&key=" + wechatparameters.mch_key;
+            string sign =helper.GetMD5(str);
+            return sign;
+        }
+        #endregion
+
+
 
 
 
