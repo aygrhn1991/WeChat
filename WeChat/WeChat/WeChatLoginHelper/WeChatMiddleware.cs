@@ -38,7 +38,7 @@ namespace WeChat.WeChatLoginHelper
                 WeChatHelper.WeChatHelper helper = new WeChatHelper.WeChatHelper();
                 var userinfo = helper.GetUserInfoBy_snsapi_userinfo();
                 //根据获取的信息进行相关业务操作，以下为示例
-                if (userinfo == null)
+                if (userinfo == null||userinfo.openid==null)
                 {
                     hub.callback("failed");
                 }

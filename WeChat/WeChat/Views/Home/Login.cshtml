@@ -9,15 +9,15 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-    <script src="~/Scripts/jquery-2.2.4.js"></script>
-    <script src="~/Scripts/qrcode.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/qrcode.min.js"></script>
+    <script src="~/Scripts/jquery.qrcode.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script>
-        alert();
-        $('#qr-result').text('请用手机扫码登录');
         var baseUrl = window.location.protocol + '//' + window.location.host;
         $(function () {
+            $('#qr-result').text('请用手机扫码登录');
             var chat = $.connection.weChatHub;
             chat.client.callback = function (d) {
                 switch (d) {
@@ -53,6 +53,6 @@
 </head>
 <body>
     <div id="qrcode"></div>
-    <div id="qr-result"></div>    
+    <div id="qr-result"></div>
 </body>
 </html>
