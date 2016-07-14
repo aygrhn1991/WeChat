@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html lang="zh-CN">
+<head>
+</head>
+<body>
+    <script>
+        function onBridgeReady() {
+            WeixinJSBridge.call('closeWindow');
+        }
+        if (typeof WeixinJSBridge == "undefined") {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else {
+            onBridgeReady();
+        }</script>
+</body>
+</html>

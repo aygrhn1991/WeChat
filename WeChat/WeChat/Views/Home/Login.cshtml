@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="~/Scripts/jquery-2.2.4.js"></script>
+    <script src="~/Scripts/qrcode.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        alert();
+        $('#qr-result').text('请用手机扫码登录');
+        var baseUrl = window.location.protocol + '//' + window.location.host;
+        $(function () {
+            var chat = $.connection.weChatHub;
+            chat.client.callback = function (d) {
+                switch (d) {
+                    case 'waiting-authorize':
+                        $('#qr-result').text('请在手机上授权');
+                        break;
+                    case 'getting-userinfo':
+                        $('#qr-result').text('获取信息中，请等待');
+                        break;
+                    case 'newuser':
+                        $('#qr-result').text('操作成功，等待跳转');
+                        window.location.href = '/Home/Register';
+                        break;
+                    case 'success':
+                        $('#qr-result').text('操作成功，等待跳转');
+                        window.location.href = '/Home/LoginSuccess';
+                        break;
+                    case 'failed':
+                        $('#qr-result').text('操作失败，请重新尝试');
+                        break;
+                }
+            }
+            $.connection.hub.start().done(function (e) {
+                var requestUrl = baseUrl + '/wechat-scan?hubId=' + encodeURIComponent(e.id);
+                $('#qrcode').qrcode({
+                    width: 200,
+                    height: 200,
+                    text: requestUrl,
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="qrcode"></div>
+    <div id="qr-result"></div>    
+</body>
+</html>

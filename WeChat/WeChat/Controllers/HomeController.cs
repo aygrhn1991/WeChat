@@ -17,6 +17,25 @@ namespace WeChat.Controllers
         }
         public ActionResult Index2()
         {
+            string url = HttpContext.Request.Url.Scheme+"://"+HttpContext.Request.Url.Host+"/Home/Index";
+           string aaa= helper.RequestCodeUrl(url, "sss", snsapi_scope.snsapi_base);
+            return Redirect(aaa);
+            //return View();
+        }
+        public ActionResult Login(int? id)
+        {
+            return View();
+        }
+        public ActionResult Register()
+        {
+            return View();
+        }
+        public ActionResult LoginSuccess()
+        {
+            return View();
+        }
+        public ActionResult Test()
+        {
             return View();
         }
         public ActionResult CheckConfiguration()
