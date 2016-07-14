@@ -14,12 +14,9 @@ namespace WeChat.Controllers
         public ActionResult Index()
         {
             return View();
-            //string url = helper.RequestCodeUrl("http://cyf.ngrok.cc/Home/Index2", "aaa", snsapi_scope.snsapi_userinfo);
-            //return Redirect(url);
         }
         public ActionResult Index2()
         {
-            var s = helper.GetUserInfo("ofX-_vnQH2aFLclfxkkh24JLXkgI");
             return View();
         }
         public ActionResult CheckConfiguration()

@@ -161,6 +161,30 @@ namespace WeChatHelper
         public string return_code { get; set; }
         public string return_msg { get; set; }
     }
+    public class SceneQRTicket
+    {
+        public string ticket { get; set; }
+        public int expire_seconds { get; set; }
+        public string url { get; set; }
+        public DateTime get_time { get; set; }
+    }
+    public class SceneQRCallBack
+    {
+        public string ToUserName { get; set; }
+        public string FromUserName { get; set; }
+        public string CreateTime { get; set; }
+        public string MsgType { get; set; }
+        public string Event { get; set; }
+        public string EventKey { get; set; }
+        public string Ticket { get; set; }
+    }
+    public class TemplateMessage
+    {
+        public string touser { get; set; }
+        public string template_id { get; set; }
+        public string url { get; set; }
+        public object data { get; set; }
+    }
     public enum RequestMethod
     {
         GET,
@@ -180,5 +204,15 @@ namespace WeChatHelper
     {
         SUCCESS,
         FAIL,
+    }
+    public enum SceneQRType
+    {
+        QR_SCENE,
+        QR_LIMIT_SCENE,
+    }
+    public enum SceneQREventType
+    {
+        subscribe,
+        SCAN,
     }
 }

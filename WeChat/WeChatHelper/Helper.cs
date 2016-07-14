@@ -155,5 +155,9 @@ namespace WeChatHelper
                 }
             }
         }
+        public string ObjectToJsonSrting<T>(T obj)
+        {
+            return JsonConvert.SerializeObject(obj);
+        }
     }
 }

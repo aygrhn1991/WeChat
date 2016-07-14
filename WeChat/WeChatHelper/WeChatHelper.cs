@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -111,9 +112,9 @@ namespace WeChatHelper
         #endregion
 
         #region accesstoken直接拉取用户信息
-        public UserInfo GetUserInfo(string openid)
+        public UserInfo GetUserInfo(string openId)
         {
-            string url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + GetAccessToken() + "&openid=" + openid + "&lang=zh_CN";
+            string url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + GetAccessToken() + "&openid=" + openId + "&lang=zh_CN";
             string response = helper.HttpHelper(url, RequestMethod.GET);
             return helper.GetObject(new UserInfo(), response);
         }
@@ -180,16 +181,16 @@ namespace WeChatHelper
         #endregion
 
         #region 支付
-        public string GetPrePaySign(UnifiedOrderRequest unifiedorder)
+        public string GetPrePaySign(UnifiedOrderRequest unifiedOrder)
         {
             WeChatParameters wechatparameters = helper.GetWeChatParameters();
             List<string> items = new List<string>();
-            var properties = unifiedorder.GetType().GetProperties();
+            var properties = unifiedOrder.GetType().GetProperties();
             foreach (var property in properties)
             {
                 if (property.Name != "sign")
                 {
-                    var value = property.GetValue(unifiedorder);
+                    var value = property.GetValue(unifiedOrder);
                     if (value != null && !string.IsNullOrEmpty(value.ToString()))
                         items.Add(string.Format("{0}={1}", property.Name, value));
                 }
@@ -200,13 +201,13 @@ namespace WeChatHelper
             string sign = helper.GetMD5(str2).ToUpper();
             return sign;
         }
-        public PayConfig GetPayConfig(UnifiedOrderRequest unifiedorder)
+        public PayConfig GetPayConfig(UnifiedOrderRequest unifiedOrder)
         {
             WeChatParameters wechatparameters = helper.GetWeChatParameters();
             PayConfig payconfig = new PayConfig();
             payconfig.appId = wechatparameters.AppID;
             payconfig.nonceStr = helper.GetNonceStr();
-            payconfig.package = GetPrePayId(unifiedorder);
+            payconfig.package = GetPrePayId(unifiedOrder);
             payconfig.signType = SignType.MD5.ToString();
             payconfig.timeStamp = helper.GetTimeStamp(DateTime.Now).ToString();
             payconfig.paySign = GetPaySign(payconfig);
@@ -217,8 +218,8 @@ namespace WeChatHelper
             using (StreamReader reader = new StreamReader(HttpContext.Current.Request.InputStream))
             {
                 string callbackstr = reader.ReadToEnd();
-                PayCallBack callback= helper.GetObjectByXmlString(new PayCallBack(), callbackstr);
-                if(callback.result_code== "SUCCESS")
+                PayCallBack callback = helper.GetObjectByXmlString(new PayCallBack(), callbackstr);
+                if (callback.result_code == "SUCCESS")
                 {
                     return PayResult.SUCCESS;
                 }
@@ -228,27 +229,124 @@ namespace WeChatHelper
                 }
             }
         }
-        private string GetPrePayId(UnifiedOrderRequest unifiedorder)
+        private string GetPrePayId(UnifiedOrderRequest unifiedOrder)
         {
             string url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-            string str = helper.ObjectToXmlSrting(unifiedorder);
+            string str = helper.ObjectToXmlSrting(unifiedOrder);
             string response = helper.HttpHelper(url, RequestMethod.POST, str);
             return helper.GetObjectByXmlString(new UnifiedOrderResponse(), response).prepay_id;
-        }        
+        }
         private string GetPaySign(PayConfig config)
         {
             WeChatParameters wechatparameters = helper.GetWeChatParameters();
             string[] array = { "appId=" + wechatparameters.AppID, "timeStamp=" + config.timeStamp, "nonceStr=" + config.nonceStr, "package=" + config.package, "signType=" + config.signType };
             Array.Sort(array);
             string str = string.Join("&", array) + "&key=" + wechatparameters.mch_key;
-            string sign =helper.GetMD5(str);
+            string sign = helper.GetMD5(str);
             return sign;
         }
         #endregion
 
+        #region 扫码一键关注
+        public string GetTempSceneQRUrl(int sceneId, int expire_seconds = 2592000)
+        {
+            object sceneQR = new
+            {
+                expire_seconds = expire_seconds,
+                action_name = SceneQRType.QR_SCENE.ToString(),
+                action_info = new
+                {
+                    scene = new
+                    {
+                        scene_id = sceneId,
+                    },
+                },
+            };
+            string ticket = RequestQRTicket(sceneQR);
+            return RequestQRUrl(ticket);
+        }
+        public string GetPermanentSceneQRUrl(int sceneId)
+        {
+            object sceneQR = new
+            {
+                action_name = SceneQRType.QR_LIMIT_SCENE.ToString(),
+                action_info = new
+                {
+                    scene = new
+                    {
+                        scene_id = sceneId,
+                    },
+                },
+            };
+            string ticket = RequestQRTicket(sceneQR);
+            return RequestQRUrl(ticket);
+        }
+        public string GetPermanentSceneQRUrl(string sceneStr)
+        {
+            object sceneQR = new
+            {
+                action_name = SceneQRType.QR_SCENE.ToString(),
+                action_info = new
+                {
+                    scene = new
+                    {
+                        scene_str = sceneStr,
+                    },
+                },
+            };
+            string ticket = RequestQRTicket(sceneQR);
+            return RequestQRUrl(ticket);
+        }
+        public SceneQRCallBack GetSceneQRCallBack()
+        {
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Request.InputStream))
+            {
+                string callbackstr = reader.ReadToEnd();
+                SceneQRCallBack callback = helper.GetObjectByXmlString(new SceneQRCallBack(), callbackstr);
+                return callback;
+            }
+        }
+        public string GetSceneQRKey(SceneQRCallBack callback)
+        {
+            if (callback.Event == SceneQREventType.SCAN.ToString())
+            {
+                return callback.EventKey;
+            }
+            else if (callback.Event == SceneQREventType.subscribe.ToString())
+            {
+                return callback.EventKey.Substring(8);
+            }
+            else
+            {
+                return "error";
+            }
+        }
+        private string RequestQRTicket(object qrObj)
+        {
+            string url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + GetAccessToken();
+            string requestStr = helper.ObjectToJsonSrting(qrObj);
+            string response = helper.HttpHelper(url, RequestMethod.POST, requestStr);
+            return helper.GetObject(new SceneQRTicket(), response).ticket;
+        }
+        private string RequestQRUrl(string ticket)
+        {
+            string url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + HttpUtility.UrlEncode(ticket);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = RequestMethod.GET.ToString();
 
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            return response.ResponseUri.AbsoluteUri;
+        }
+        #endregion
 
-
+        #region 发送模板消息
+        public void SendTemplateMessage(TemplateMessage msg)
+        {
+            string url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + GetAccessToken();
+            string requestStr = helper.ObjectToJsonSrting(msg);
+            helper.HttpHelper(url, RequestMethod.POST, requestStr);
+        }
+        #endregion
 
 
 
