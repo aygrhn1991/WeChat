@@ -42,7 +42,7 @@ namespace WeChatHelper
         #region 基础accesstoken
         private string GetAccessToken()
         {
-            string path = HttpContext.Current.Server.MapPath("~/access_token.json");
+            string path = HttpContext.Current.Server.MapPath("~/wc_access_token.json");
             if (File.Exists(path))
             {
                 string tempString = helper.ReadFromFile(path);
@@ -71,7 +71,7 @@ namespace WeChatHelper
             string url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + parameters.AppID + "&secret=" + parameters.AppSecret;
             string response = helper.HttpHelper(url, RequestMethod.GET);
             response = response.Replace("}", ",\"get_time\":\"" + DateTime.Now.ToString() + "\"}");
-            string path = HttpContext.Current.Server.MapPath("~/access_token.json");
+            string path = HttpContext.Current.Server.MapPath("~/wc_access_token.json");
             helper.WriteToFile(response, path);
         }
         #endregion
@@ -146,7 +146,7 @@ namespace WeChatHelper
         }
         private string GetJSApiTicket()
         {
-            string path = HttpContext.Current.Server.MapPath("~/jsapi_ticket.json");
+            string path = HttpContext.Current.Server.MapPath("~/wc_jsapi_ticket.json");
             if (File.Exists(path))
             {
                 string tempString = helper.ReadFromFile(path);
@@ -175,7 +175,7 @@ namespace WeChatHelper
             string url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accesstoken + "&type=jsapi";
             string response = helper.HttpHelper(url, RequestMethod.GET);
             response = response.Replace("}", ",\"get_time\":\"" + DateTime.Now.ToString() + "\"}");
-            string path = HttpContext.Current.Server.MapPath("~/jsapi_ticket.json");
+            string path = HttpContext.Current.Server.MapPath("~/wc_jsapi_ticket.json");
             helper.WriteToFile(response, path);
         }
         #endregion

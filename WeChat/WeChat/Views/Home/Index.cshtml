@@ -8,11 +8,21 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <meta property="qc:admins" content="4556374416667273633" />
     <title>Index</title>
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script>
+       
+            function toLogin()
+            {
+                //以下为按钮点击事件的逻辑。注意这里要重新打开窗口
+                //否则后面跳转到QQ登录，授权页面时会直接缩小当前浏览器的窗口，而不是打开新窗口
+                var A = window.open("/Home/QQLogin", "TencentLogin", "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+            } 
+       
+    </script>
 </head>
 <body>
-    <div> 
-        hi!
-    </div>
+    <img src="~/Images/Connect_logo_7.png" onclick="toLogin()"/>
 </body>
 </html>

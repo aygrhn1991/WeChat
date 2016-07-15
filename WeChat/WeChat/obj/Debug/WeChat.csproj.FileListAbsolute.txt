@@ -57,3 +57,5 @@ E:\GitSpace\WeChat\WeChat\WeChat\bin\zh-Hans\Microsoft.AspNet.SignalR.SystemWeb.
 E:\GitSpace\WeChat\WeChat\WeChat\bin\zh-Hans\Microsoft.Owin.resources.dll
 E:\GitSpace\WeChat\WeChat\WeChat\bin\zh-Hans\Microsoft.Owin.Host.SystemWeb.resources.dll
 E:\GitSpace\WeChat\WeChat\WeChat\bin\zh-Hans\Microsoft.Owin.Security.resources.dll
+E:\GitSpace\WeChat\WeChat\WeChat\bin\QQHelper.dll
+E:\GitSpace\WeChat\WeChat\WeChat\bin\QQHelper.pdb

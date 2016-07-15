@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat", "WeChat\WeChat.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChatHelper", "WeChatHelper\WeChatHelper.csproj", "{59E21280-4200-432F-87E5-8651ACADA5E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QQHelper", "QQHelper\QQHelper.csproj", "{B4FA8FD7-84CD-4A01-87D8-174D9D0FA54D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{59E21280-4200-432F-87E5-8651ACADA5E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59E21280-4200-432F-87E5-8651ACADA5E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59E21280-4200-432F-87E5-8651ACADA5E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4FA8FD7-84CD-4A01-87D8-174D9D0FA54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4FA8FD7-84CD-4A01-87D8-174D9D0FA54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4FA8FD7-84CD-4A01-87D8-174D9D0FA54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4FA8FD7-84CD-4A01-87D8-174D9D0FA54D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

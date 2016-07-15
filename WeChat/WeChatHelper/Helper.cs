@@ -40,15 +40,15 @@ namespace WeChatHelper
             string path;
             if (model is AccessToken)
             {
-                path = HttpContext.Current.Server.MapPath("~/access_token.json");
+                path = HttpContext.Current.Server.MapPath("~/wc_access_token.json");
             }
             else if (model is JSApiTicket)
             {
-                path = HttpContext.Current.Server.MapPath("~/jsapi_ticket.json");
+                path = HttpContext.Current.Server.MapPath("~/wc_jsapi_ticket.json");
             }
             else
             {
-                path = HttpContext.Current.Server.MapPath("~/wechat_parameters.json");
+                path = HttpContext.Current.Server.MapPath("~/wc_parameters.json");
             }
             string str = ReadFromFile(path);
             using (StringReader stringReader = new StringReader(str))

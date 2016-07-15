@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QQHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,18 +12,35 @@ namespace WeChat.Controllers
     {
         // GET: Home
         WeChatHelper.WeChatHelper helper = new WeChatHelper.WeChatHelper();
+        QQHelper.QQHelper help = new QQHelper.QQHelper();
         public ActionResult Index()
         {
             return View();
         }
         public ActionResult Index2()
         {
-            //string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/Index";
-            //string aaa = helper.RequestCodeUrl(url, "sss", snsapi_scope.snsapi_userinfo);
-            //return Redirect(aaa);
+            string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/Index";
+            string aaa = helper.RequestCodeUrl(url, "sss", snsapi_scope.snsapi_userinfo);
+            return Redirect(aaa);
+            //return View();
+        }
+        public ActionResult Index3()
+        {
+            string url = HttpContext.Request.Url.AbsoluteUri;
+            string token = help.GetAccessToken(url);
+            string openid = help.GetOpenId(token);
+            var sss = help.GetUserInfo(openid, token);
+            ViewBag.img = sss.figureurl_1;
+            ViewBag.name = sss.nickname;
             return View();
         }
-        public ActionResult Login(int? id)
+        public ActionResult QQLogin()
+        {
+            string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/Index3";
+            string aaa = help.RequestCodeUrl(url, "123", new QQAuthScopes[] { });
+            return Redirect(aaa);
+        }
+        public ActionResult Login()
         {
             return View();
         }
