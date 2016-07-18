@@ -73,7 +73,7 @@ namespace WeChat.Controllers
         {
             string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/BaiduCallBack";
             BaiduHelper.UserInfo info = baidu.GetUserInfo(url);
-            ViewBag.img = info.portrait;
+            ViewBag.img = info.small_portrait;
             ViewBag.name = info.username;
             return View();
         }
