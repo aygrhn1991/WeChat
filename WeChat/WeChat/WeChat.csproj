@@ -118,7 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="baidu_parameters.json" />
     <None Include="Properties\PublishProfiles\wx.pubxml" />
+    <Content Include="Images\loginbtn_03.png" />
     <Content Include="qq_parameters.json" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Images\Connect_logo_7.png" />
@@ -150,15 +152,14 @@
     <Content Include="wc_access_token.json" />
     <Content Include="wc_jsapi_ticket.json" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\LoginSuccess.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
     <Content Include="Scripts\qrcode.min.js.map" />
     <Content Include="Scripts\jquery.qrcode.min.js.map" />
-    <Content Include="Views\Home\Index3.cshtml" />
+    <Content Include="sina_parameters.json" />
+    <Content Include="Views\Home\WeChatCallBack.cshtml" />
+    <Content Include="Views\Home\QQCallBack.cshtml" />
+    <Content Include="Views\Home\SinaCallBack.cshtml" />
+    <Content Include="Views\Home\BaiduCallBack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -172,9 +173,17 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaiduHelper\BaiduHelper.csproj">
+      <Project>{ad8c3f2b-d4df-49ef-a10b-886fe9851181}</Project>
+      <Name>BaiduHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QQHelper\QQHelper.csproj">
       <Project>{b4fa8fd7-84cd-4a01-87d8-174d9d0fa54d}</Project>
       <Name>QQHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinaHelper\SinaHelper.csproj">
+      <Project>{66dc9e71-3e9c-450d-8948-d83c396bd3a0}</Project>
+      <Name>SinaHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\WeChatHelper\WeChatHelper.csproj">
       <Project>{59e21280-4200-432f-87e5-8651acada5e1}</Project>

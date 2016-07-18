@@ -59,3 +59,7 @@ E:\GitSpace\WeChat\WeChat\WeChat\bin\zh-Hans\Microsoft.Owin.Host.SystemWeb.resou
 E:\GitSpace\WeChat\WeChat\WeChat\bin\zh-Hans\Microsoft.Owin.Security.resources.dll
 E:\GitSpace\WeChat\WeChat\WeChat\bin\QQHelper.dll
 E:\GitSpace\WeChat\WeChat\WeChat\bin\QQHelper.pdb
+E:\GitSpace\WeChat\WeChat\WeChat\bin\SinaHelper.dll
+E:\GitSpace\WeChat\WeChat\WeChat\bin\SinaHelper.pdb
+E:\GitSpace\WeChat\WeChat\WeChat\bin\BaiduHelper.dll
+E:\GitSpace\WeChat\WeChat\WeChat\bin\BaiduHelper.pdb
