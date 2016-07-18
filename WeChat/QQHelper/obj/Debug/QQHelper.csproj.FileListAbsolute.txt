@@ -1,0 +1,7 @@
+E:\GitSpace\WeChat\WeChat\QQHelper\bin\Debug\QQHelper.dll
+E:\GitSpace\WeChat\WeChat\QQHelper\bin\Debug\QQHelper.pdb
+E:\GitSpace\WeChat\WeChat\QQHelper\bin\Debug\Newtonsoft.Json.dll
+E:\GitSpace\WeChat\WeChat\QQHelper\bin\Debug\Newtonsoft.Json.xml
+E:\GitSpace\WeChat\WeChat\QQHelper\obj\Debug\QQHelper.csprojResolveAssemblyReference.cache
+E:\GitSpace\WeChat\WeChat\QQHelper\obj\Debug\QQHelper.dll
+E:\GitSpace\WeChat\WeChat\QQHelper\obj\Debug\QQHelper.pdb

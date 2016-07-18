@@ -26,7 +26,40 @@ namespace BaiduHelper
         public string userid { get; set; }
         public string username { get; set; }
         public string realname { get; set; }
-        public string portrait { get; set; }
+        private string _portrait;
+        public string portrait
+        {
+            get
+            {
+                return _portrait;
+            }
+            set
+            {
+                _portrait = value;
+            }
+        }
+        public string small_portrait
+        {
+            get
+            {
+                return "http://tb.himg.baidu.com/sys/portraitn/item/" + _portrait;
+            }
+            set
+            {
+                _portrait = value;
+            }
+        }
+        public string large_portrait
+        {
+            get
+            {
+                return "http://tb.himg.baidu.com/sys/portrait/item/" + _portrait;
+            }
+            set
+            {
+                _portrait = value;
+            }
+        }
         public string userdetail { get; set; }
         public string birthday { get; set; }
         public string marriage { get; set; }
