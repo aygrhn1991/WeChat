@@ -63,3 +63,5 @@ E:\GitSpace\WeChat\WeChat\WeChat\bin\SinaHelper.dll
 E:\GitSpace\WeChat\WeChat\WeChat\bin\SinaHelper.pdb
 E:\GitSpace\WeChat\WeChat\WeChat\bin\BaiduHelper.dll
 E:\GitSpace\WeChat\WeChat\WeChat\bin\BaiduHelper.pdb
+E:\GitSpace\WeChat\WeChat\WeChat\bin\QihuHelper.dll
+E:\GitSpace\WeChat\WeChat\WeChat\bin\QihuHelper.pdb

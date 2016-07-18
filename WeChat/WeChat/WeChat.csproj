@@ -122,6 +122,7 @@
     <None Include="Properties\PublishProfiles\wx.pubxml" />
     <Content Include="Images\loginbtn_03.png" />
     <Content Include="qq_parameters.json" />
+    <Content Include="qihu_parameters.json" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Images\Connect_logo_7.png" />
     <Content Include="Scripts\jquery-2.2.4.js" />
@@ -160,6 +161,7 @@
     <Content Include="Views\Home\WeChatCallBack.cshtml" />
     <Content Include="Views\Home\QQCallBack.cshtml" />
     <Content Include="Views\Home\SinaCallBack.cshtml" />
+    <Content Include="Views\Home\QihuCallBack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,6 +178,10 @@
     <ProjectReference Include="..\BaiduHelper\BaiduHelper.csproj">
       <Project>{ad8c3f2b-d4df-49ef-a10b-886fe9851181}</Project>
       <Name>BaiduHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QihuHelper\QihuHelper.csproj">
+      <Project>{77fc7303-c7c1-4a08-80c9-590cabde5f0f}</Project>
+      <Name>QihuHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\QQHelper\QQHelper.csproj">
       <Project>{b4fa8fd7-84cd-4a01-87d8-174d9d0fa54d}</Project>

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("TaobaoHelper")]
+[assembly: AssemblyTitle("QihuHelper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TaobaoHelper")]
+[assembly: AssemblyProduct("QihuHelper")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("c42342e3-adfa-4957-83c3-a0349b856539")]
+[assembly: Guid("77fc7303-c7c1-4a08-80c9-590cabde5f0f")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

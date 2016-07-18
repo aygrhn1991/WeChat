@@ -1,4 +1,5 @@
 ﻿using BaiduHelper;
+using QihuHelper;
 using QQHelper;
 using SinaHelper;
 using System;
@@ -17,6 +18,7 @@ namespace WeChat.Controllers
         QQHelper.QQHelper qq = new QQHelper.QQHelper();
         SinaHelper.SinaHelper sina = new SinaHelper.SinaHelper();
         BaiduHelper.BaiduHelper baidu = new BaiduHelper.BaiduHelper();
+        QihuHelper.QihuHelper qihu = new QihuHelper.QihuHelper();
         public ActionResult Index()
         {
             return View();
@@ -28,7 +30,7 @@ namespace WeChat.Controllers
             return Redirect(red_url);
         }
         public ActionResult WeChatCallBack()
-        {            
+        {
             return View();
         }
         public ActionResult QQ()
@@ -46,7 +48,7 @@ namespace WeChat.Controllers
             ViewBag.img = sss.figureurl_1;
             ViewBag.name = sss.nickname;
             return View();
-        }        
+        }
         public ActionResult Sina()
         {
             string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/SinaCallBack";
@@ -57,7 +59,7 @@ namespace WeChat.Controllers
         {
             string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/SinaCallBack";
             SinaHelper.AccessToken token = sina.GetAccessToken(url);
-            string uid = token.uid;        
+            string uid = token.uid;
             var sss = sina.GetUserInfo(uid, token.access_token);
             ViewBag.img = sss.avatar_large;
             ViewBag.name = sss.screen_name;
@@ -75,6 +77,21 @@ namespace WeChat.Controllers
             BaiduHelper.UserInfo info = baidu.GetUserInfo(url);
             ViewBag.img = info.small_portrait;
             ViewBag.name = info.username;
+            return View();
+        }
+        public ActionResult Qihu()
+        {
+            string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/QihuCallBack";
+            string red_url = qihu.RequestCodeUrl(url, "aaa", QihuAuthScopes.basic);
+            return Redirect(red_url);
+        }
+        public ActionResult QihuCallBack()
+        {
+            string url = HttpContext.Request.Url.Scheme + "://" + HttpContext.Request.Url.Host + "/Home/QihuCallBack";
+            QihuHelper.UserInfo info = qihu.GetUserInfo(url);
+            ViewBag.img = info.avatar;
+            ViewBag.name = info.name;
+            ViewBag.sex = info.sex;
             return View();
         }
         public ActionResult Test()

@@ -2,6 +2,5 @@ E:\GitSpace\WeChat\WeChat\BaiduHelper\bin\Debug\BaiduHelper.dll
 E:\GitSpace\WeChat\WeChat\BaiduHelper\bin\Debug\BaiduHelper.pdb
 E:\GitSpace\WeChat\WeChat\BaiduHelper\bin\Debug\Newtonsoft.Json.dll
 E:\GitSpace\WeChat\WeChat\BaiduHelper\bin\Debug\Newtonsoft.Json.xml
-E:\GitSpace\WeChat\WeChat\BaiduHelper\obj\Debug\BaiduHelper.csprojResolveAssemblyReference.cache
 E:\GitSpace\WeChat\WeChat\BaiduHelper\obj\Debug\BaiduHelper.dll
 E:\GitSpace\WeChat\WeChat\BaiduHelper\obj\Debug\BaiduHelper.pdb

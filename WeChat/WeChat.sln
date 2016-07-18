@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat", "WeChat\WeChat.csproj", "{E51C8C93-087F-422C-99B5-B5EBA655969C}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinaHelper", "SinaHelper\Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaiduHelper", "BaiduHelper\BaiduHelper.csproj", "{AD8C3F2B-D4DF-49EF-A10B-886FE9851181}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaobaoHelper", "TaobaoHelper\TaobaoHelper.csproj", "{C42342E3-ADFA-4957-83C3-A0349B856539}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QihuHelper", "QihuHelper\QihuHelper.csproj", "{77FC7303-C7C1-4A08-80C9-590CABDE5F0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{AD8C3F2B-D4DF-49EF-A10B-886FE9851181}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD8C3F2B-D4DF-49EF-A10B-886FE9851181}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD8C3F2B-D4DF-49EF-A10B-886FE9851181}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C42342E3-ADFA-4957-83C3-A0349B856539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C42342E3-ADFA-4957-83C3-A0349B856539}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C42342E3-ADFA-4957-83C3-A0349B856539}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C42342E3-ADFA-4957-83C3-A0349B856539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77FC7303-C7C1-4A08-80C9-590CABDE5F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77FC7303-C7C1-4A08-80C9-590CABDE5F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77FC7303-C7C1-4A08-80C9-590CABDE5F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77FC7303-C7C1-4A08-80C9-590CABDE5F0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
